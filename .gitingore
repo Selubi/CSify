@@ -1,2 +1,2 @@
-.data/*
-./constants.py
+data/
+constants.py
