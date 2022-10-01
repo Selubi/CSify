@@ -1,7 +1,3 @@
-import spacy
-import deepl
-
-
 class Csify:
     def __init__(self, en_dependency_parser, jp_dependency_parser, translator):
         self.en_dependency_parser = en_dependency_parser
