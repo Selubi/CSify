@@ -17,8 +17,7 @@ class Csify:
 
 def en_to_cs(en_text, en_dependency_parser, translator):
     """Generates EN based code switched sentence.
-    Converts the largest (longest) subtree among Dependency Tree ROOT's first child and then translates it.
-    If the first word is SCONJ, exclude it from the translation.
+    Converts the largest subtree among Dependency Tree ROOT's first child and then translates it.
     Translates in place (no position change for phrases)"""
     tokenized = en_dependency_parser(en_text)  # Runs spacy parser.
     result = ""
@@ -45,7 +44,7 @@ def en_to_cs(en_text, en_dependency_parser, translator):
                     continue
                 # Adds the remaining subtree
                 result += flatten_tree(root) + ' '
-            # Adds the root if the root is on mostright
+            # Adds the root if the root is on most right
             if root_pos > i:
                 result += token.text
 
@@ -58,9 +57,8 @@ def en_to_cs(en_text, en_dependency_parser, translator):
 
 
 def ja_to_cs(en_text, jp_dependency_parser, translator):
-    """Generates JP based code switched sentence.
-    Converts the largest (longest) subtree among Dependency Tree ROOT's left first child and then translates it.
-    If the last character is a japanese particle exclude it from the translation.
+    """Generates JA based code switched sentence.
+    Converts the largest subtree among Dependency Tree ROOT's first child and then translates it.
     Translates in place (no position change for phrases)"""
     tokenized = jp_dependency_parser(en_text)  # Runs spacy parser.
     result = ""
@@ -85,7 +83,7 @@ def ja_to_cs(en_text, jp_dependency_parser, translator):
                     continue
                 # Adds the remaining subtree
                 result += flatten_tree(root)
-            # Adds the root if the root is on mostright
+            # Adds the root if the root is on most right
             if root_pos > i:
                 result += token.text
 
@@ -104,8 +102,11 @@ def flatten_tree(tree):
 
 def get_largest_subtree(forest):
     """
-    Given a list of tree roots, Returns flattened string of tree_root's largest child subtree and its index.
-    If the child subtree only has size of one, only add it if it is a NOUN.
+    Given a list of tree roots,
+    Return flattened string of the largest tree root subtree,
+    its index in the list, and the reference to the largest root itself.
+    If the largest size of between the trees is one, return the first vertex that is a NOUN.
+    Size of a tree refers to the number of vertex in that tree.
     """
     largest_subtree_index = -1
     flattened_largest_subtree = ""
