@@ -10,6 +10,8 @@ class Csify:
     def ja_to_cs(self, to_translate):
         return ja_to_cs(to_translate, self.jp_dependency_parser, self.translator)
 
+def generate():
+    pass
 
 def en_to_cs(en_text, en_dependency_parser, translator):
     """Generates EN based code switched sentence.
