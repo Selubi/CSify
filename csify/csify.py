@@ -30,10 +30,6 @@ def en_to_cs(en_text, spacy_model, translator):
 
             to_translate, largest_subtree_index, largest_subtree_root = get_largest_subtree(
                 token.children)
-            sconj = ""
-            if largest_subtree_root:
-                sconj = detect_sconj(largest_subtree_root)
-            to_translate = to_translate.removeprefix(sconj)
 
             i = -1
             for root in token.children:
@@ -43,7 +39,7 @@ def en_to_cs(en_text, spacy_model, translator):
                     result += token.text+' '
                 # Translates and adds the largest subtree
                 if i == largest_subtree_index and to_translate:
-                    result += sconj+' ' + \
+                    result +=' ' + \
                         translator.translate_text(
                             to_translate, target_lang="JA").text+' '
                     continue
@@ -76,10 +72,6 @@ def ja_to_cs(en_text, spacy_model, translator):
 
             to_translate, largest_subtree_index, largest_subtree_root = get_largest_subtree(
                 token.lefts)
-            particle = ""
-            if largest_subtree_root:
-                particle = detect_particle(largest_subtree_root)
-            to_translate = to_translate.removesuffix(particle)
             i = -1
             for root in token.children:
                 i += 1
@@ -90,7 +82,7 @@ def ja_to_cs(en_text, spacy_model, translator):
                 if i == largest_subtree_index and to_translate:
 
                     result += translator.translate_text(
-                        to_translate, target_lang="EN-US").text.strip('.?!')+particle
+                        to_translate, target_lang="EN-US").text.strip('.?!')
                     continue
                 # Adds the remaining subtree
                 result += flatten_tree(root)
@@ -106,34 +98,6 @@ def ja_to_cs(en_text, spacy_model, translator):
     return result
 
 
-def get_leftmost_leaf(root):
-    leftlist = list(root.lefts)
-    if(leftlist):
-        return get_leftmost_leaf(leftlist[0])
-    return root
-
-
-def get_rightmostmost_leaf(root):
-    rightlist = list(root.rights)
-    if(rightlist):
-        return get_rightmostmost_leaf(rightlist[-1])
-    return root
-
-
-def detect_sconj(tree_root):
-    """Detects if the first word of subtree is SCONJ, returns the word if it is, returns empty string otherwise."""
-    leaf = get_leftmost_leaf(tree_root)
-    if leaf.pos_ == "SCONJ":
-        return leaf.text
-    return ""
-
-
-def detect_particle(tree_root):
-    """Detects if the last character of subtree is a japanese particle, returns it if it is, returns empty string otherwise."""
-    leaf = get_rightmostmost_leaf(tree_root)
-    if leaf.pos_ == "ADP" or "SCONJ":
-        return leaf.text
-    return ""
 
 
 def flatten_tree(tree):
