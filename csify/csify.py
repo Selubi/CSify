@@ -3,7 +3,7 @@ import deepl
 
 
 class Csify:
-    def __init__(self, en_dependency_parser, jp_dependency_parser,  translator):
+    def __init__(self, en_dependency_parser, jp_dependency_parser, translator):
         self.en_dependency_parser = en_dependency_parser
         self.jp_dependency_parser = jp_dependency_parser
         self.translator = translator
@@ -15,12 +15,12 @@ class Csify:
         return ja_to_cs(to_translate, self.jp_dependency_parser, self.translator)
 
 
-def en_to_cs(en_text, spacy_model, translator):
+def en_to_cs(en_text, en_dependency_parser, translator):
     """Generates EN based code switched sentence.
     Converts the largest (longest) subtree among Dependency Tree ROOT's first child and then translates it.
     If the first word is SCONJ, exclude it from the translation.
     Translates in place (no position change for phrases)"""
-    tokenized = spacy_model(en_text)  # Runs spacy parser.
+    tokenized = en_dependency_parser(en_text)  # Runs spacy parser.
     result = ""
 
     for token in tokenized:
@@ -32,19 +32,19 @@ def en_to_cs(en_text, spacy_model, translator):
                 token.children)
 
             i = -1
-            for root in token.children:
+            for root in token.children:  # Iterates through first children
                 i += 1
                 # Adds the current root to its position
-                if(i == root_pos):
-                    result += token.text+' '
+                if i == root_pos:
+                    result += token.text + ' '
                 # Translates and adds the largest subtree
                 if i == largest_subtree_index and to_translate:
-                    result +=' ' + \
+                    result += \
                         translator.translate_text(
-                            to_translate, target_lang="JA").text+' '
+                            to_translate, target_lang="JA").text + ' '
                     continue
                 # Adds the remaining subtree
-                result += flatten_tree(root)+' '
+                result += flatten_tree(root) + ' '
             # Adds the root if the root is on mostright
             if root_pos > i:
                 result += token.text
@@ -57,12 +57,12 @@ def en_to_cs(en_text, spacy_model, translator):
     return result
 
 
-def ja_to_cs(en_text, spacy_model, translator):
+def ja_to_cs(en_text, jp_dependency_parser, translator):
     """Generates JP based code switched sentence.
     Converts the largest (longest) subtree among Dependency Tree ROOT's left first child and then translates it.
     If the last character is a japanese particle exclude it from the translation.
     Translates in place (no position change for phrases)"""
-    tokenized = spacy_model(en_text)  # Runs spacy parser.
+    tokenized = jp_dependency_parser(en_text)  # Runs spacy parser.
     result = ""
 
     for token in tokenized:
@@ -73,14 +73,13 @@ def ja_to_cs(en_text, spacy_model, translator):
             to_translate, largest_subtree_index, largest_subtree_root = get_largest_subtree(
                 token.lefts)
             i = -1
-            for root in token.children:
+            for root in token.children:  # Iterates through first children
                 i += 1
                 # Adds the current root to its position
-                if(i == root_pos):
+                if i == root_pos:
                     result += token.text
                 # Translates and adds the largest subtree
                 if i == largest_subtree_index and to_translate:
-
                     result += translator.translate_text(
                         to_translate, target_lang="EN-US").text.strip('.?!')
                     continue
@@ -96,8 +95,6 @@ def ja_to_cs(en_text, spacy_model, translator):
             # print(token.text)
 
     return result
-
-
 
 
 def flatten_tree(tree):
