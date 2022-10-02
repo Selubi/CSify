@@ -5,15 +5,13 @@ import csify.demo
 
 #  This is a demo on how to use the Csify class
 if __name__ == '__main__':
-    #  Create an English to Japanese code-switcher instance. Arguements are defined in ./csify_args.py
-    en_to_enja_code_switcher = Csify(**csify.csify_args.EN_TO_ENJA)
-    #  Generate code-switched sentence from monolingual sentence
-    print(en_to_enja_code_switcher.generate("you are a good soldier, tup. it's time to go now."))
+    en_sentence = "you are a good soldier, tup. it's time to go now."
+    ja_sentence = "植民地とは征服されるものでした そして今日 国は買収されるものなのです"
+    zh_sentence = "尽管我早晨六点到了售票处，但是我还没买到票"  # Even though I arrived at the ticket office at 6 am, I was still not able to buy a ticket.
+    ko_sentence = "저는 어제 약국에 가서 약을 많이 샀어요."  # I went to the pharmacy and bought a lot of medicine yesterday.
 
-    # Create an Japanese to English code-switcher instance. Arguements are defined in ./csify_args.py
-    ja_to_jaen_code_switcher = Csify(**csify.csify_args.JA_TO_JAEN)
-    #  Generate code-switched sentence from monolingual sentence
-    print(ja_to_jaen_code_switcher.generate("植民地とは征服されるものでした そして今日 国は買収されるものなのです"))
+    code_switcher = Csify(**csify.csify_args.ZH_TO_ZHJA)
+    print(code_switcher.generate(zh_sentence))
 
     """
     This demo function is located at ./csify/demo.py
@@ -26,4 +24,4 @@ if __name__ == '__main__':
     This demo also features a progress bar that tracks how many sentences it has generating and its speed in 
     it/s (sentences per second).
     """
-    # csify.demo.generate_jesc_cs()
+    csify.demo.generate_jesc_cs()
