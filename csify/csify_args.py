@@ -17,3 +17,16 @@ JA_TO_JAEN = {
         translator.translate_text(base_sentence, target_lang="EN-US").text.strip('.?!')),
     "space": ''
 }
+
+EN_TO_ENID = {
+    "spacy_model": "en_core_web_sm",
+    "translate_func": lambda base_sentence: (
+        translator.translate_text(base_sentence, target_lang="ID")).text,
+    "space": ' '
+}
+# EN_TO_ENJA = {
+#     "spacy_model": "ko_core_news_sm",
+#     "translate_func": lambda base_sentence: (
+#         translator.translate_text(base_sentence, target_lang="JA")).text,
+#     "space": ''
+# }

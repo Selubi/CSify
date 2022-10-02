@@ -61,7 +61,7 @@ def make_csv(df, dir_path, filename):
     path_to_file = dir_path / filename
     print(f"Writing to {path_to_file}")
     df.to_csv(path_or_buf=path_to_file,
-              index=False, quoting=QUOTE_NONE, sep=',')
+              index=False, quoting=QUOTE_NONE, sep='\t')
     print("OK")
 
 

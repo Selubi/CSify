@@ -8,7 +8,7 @@ if __name__ == '__main__':
     #  Create an English to Japanese code-switcher instance. Arguements are defined in ./csify_args.py
     en_to_enja_code_switcher = Csify(**csify.csify_args.EN_TO_ENJA)
     #  Generate code-switched sentence from monolingual sentence
-    print(en_to_enja_code_switcher.generate("if my instinct when i was in hysteria mode is correct, we have a chance!"))
+    print(en_to_enja_code_switcher.generate("you are a good soldier, tup. it's time to go now."))
 
     # Create an Japanese to English code-switcher instance. Arguements are defined in ./csify_args.py
     ja_to_jaen_code_switcher = Csify(**csify.csify_args.JA_TO_JAEN)
@@ -26,4 +26,4 @@ if __name__ == '__main__':
     This demo also features a progress bar that tracks how many sentences it has generating and its speed in 
     it/s (sentences per second).
     """
-    csify.demo.generate_jesc_cs()
+    # csify.demo.generate_jesc_cs()
