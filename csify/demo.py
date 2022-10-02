@@ -1,12 +1,14 @@
 from pathlib import Path
 from csv import QUOTE_NONE
 from tqdm import tqdm
+from csify.csify import Csify
 import requests
 import tarfile
 import pandas as pd
+import csify.csify_args
 
 
-def generate_jesc_cs(code_switcher):
+def generate_jesc_cs():
     test_data_path = Path('./data/split/test')
     print("Checking if Test data exists...")
     get_data(test_data_path)
@@ -14,11 +16,13 @@ def generate_jesc_cs(code_switcher):
     df = read_data(test_data_path)
     result_dir_path = Path("./data/CSified")
     print("Generating EN-CS input for test data")
-    apply_df_in_chunks(df, result_dir_path, "EN-Code-Switched", 'EN-Sentence',
-                       code_switcher.en_to_cs)
+    en_to_enja_code_switcher = Csify(**csify.csify_args.EN_TO_ENJA)
+    csify_df(df, result_dir_path, "EN-Code-Switched", 'EN-Sentence',
+             en_to_enja_code_switcher.generate)
     print("Generating JA-CS input for test data")
-    apply_df_in_chunks(df, result_dir_path, "JA-Code-Switched", 'JA-Sentence',
-                       code_switcher.ja_to_cs)
+    ja_to_jaen_code_switcher = Csify(**csify.csify_args.JA_TO_JAEN)
+    csify_df(df, result_dir_path, "JA-Code-Switched", 'JA-Sentence',
+             ja_to_jaen_code_switcher.generate)
 
 
 def get_data(data_path):
@@ -37,7 +41,7 @@ def read_data(data_path):
     return pd.read_csv(data_path, quoting=QUOTE_NONE, delimiter="\t", header=None, names=["EN-Sentence", "JA-Sentence"])
 
 
-def apply_df_in_chunks(df, dir_path, filename, base_column, func, chunksize=0):
+def csify_df(df, dir_path, filename, base_column, func, chunksize=0):
     gen_input_func(df, dir_path, filename, base_column, func)
 
 
@@ -57,7 +61,7 @@ def make_csv(df, dir_path, filename):
     path_to_file = dir_path / filename
     print(f"Writing to {path_to_file}")
     df.to_csv(path_or_buf=path_to_file,
-              index=False, quoting=QUOTE_NONE, sep='\t')
+              index=False, quoting=QUOTE_NONE, sep=',')
     print("OK")
 
 
