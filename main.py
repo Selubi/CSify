@@ -1,6 +1,7 @@
 # from spacy.cli.download import download as download_spacy
 from csify.csify import Csify
-import csify.csify_args
+import csify.deepl_args
+import csify.google_translate_args
 import csify.demo
 
 #  This is a demo on how to use the Csify class
@@ -10,9 +11,11 @@ if __name__ == '__main__':
     zh_sentence = "尽管我早晨六点到了售票处，但是我还没买到票"  # Even though I arrived at the ticket office at 6 am, I was still not able to buy a ticket.
     ko_sentence = "저는 어제 약국에 가서 약을 많이 샀어요."  # I went to the pharmacy and bought a lot of medicine yesterday.
 
-    code_switcher = Csify(**csify.csify_args.ZH_TO_ZHJA)
+    code_switcher = Csify(**csify.deepl_args.ZH_TO_ZHJA)
     print(code_switcher.generate(zh_sentence))
 
+    code_switcher = Csify(**csify.google_translate_args.KO_TO_KOJA)
+    print(code_switcher.generate(ko_sentence))
     """
     This demo function is located at ./csify/demo.py
     It downloads and extracts the JESC split corpus, a parallel Japanese-English monolingual corpus.

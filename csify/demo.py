@@ -5,7 +5,7 @@ from csify.csify import Csify
 import requests
 import tarfile
 import pandas as pd
-import csify.csify_args
+import csify.deepl_args
 
 
 def generate_jesc_cs():
@@ -16,11 +16,11 @@ def generate_jesc_cs():
     df = read_data(test_data_path)
     result_dir_path = Path("./data/CSified")
     print("Generating EN-CS input for test data")
-    en_to_enja_code_switcher = Csify(**csify.csify_args.EN_TO_ENJA)
+    en_to_enja_code_switcher = Csify(**csify.deepl_args.EN_TO_ENJA)
     csify_df(df, result_dir_path, "EN-Code-Switched", 'EN-Sentence',
              en_to_enja_code_switcher.generate)
     print("Generating JA-CS input for test data")
-    ja_to_jaen_code_switcher = Csify(**csify.csify_args.JA_TO_JAEN)
+    ja_to_jaen_code_switcher = Csify(**csify.deepl_args.JA_TO_JAEN)
     csify_df(df, result_dir_path, "JA-Code-Switched", 'JA-Sentence',
              ja_to_jaen_code_switcher.generate)
 
