@@ -10,6 +10,41 @@ JA_TO_JAKO = {
     "space": ''
 }
 
+EN_TO_ENTH = {
+    "spacy_model": "en_core_web_sm",
+    "translate_func": lambda base_sentence:
+    translate_client.translate(base_sentence, target_language="TH")["translatedText"],
+    "space": ' '
+}
+
+JA_TO_JATH = {
+    "spacy_model": "ja_core_news_sm",
+    "translate_func": lambda base_sentence:
+    translate_client.translate(base_sentence, target_language="TH")["translatedText"],
+    "space": ''
+}
+
+EN_TO_ENTH = {
+    "spacy_model": "en_core_web_sm",
+    "translate_func": lambda base_sentence:
+    translate_client.translate(base_sentence, target_language="TH")["translatedText"],
+    "space": ' '
+}
+
+JA_TO_JAHI = {
+    "spacy_model": "ja_core_news_sm",
+    "translate_func": lambda base_sentence:
+    translate_client.translate(base_sentence, target_language="HI")["translatedText"],
+    "space": ''
+}
+
+EN_TO_ENHI = {
+    "spacy_model": "en_core_web_sm",
+    "translate_func": lambda base_sentence:
+    translate_client.translate(base_sentence, target_language="HI")["translatedText"],
+    "space": ' '
+}
+
 KO_TO_KOJA = {
     "spacy_model": "ko_core_news_sm",
     "translate_func": lambda base_sentence:
