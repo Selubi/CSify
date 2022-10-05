@@ -49,8 +49,8 @@ def to_cs(base_sentence, dependency_parser, translate, space):
                 result += token.text
 
             # # for debugging
-            print([list(i.subtree) for i in token.children])
-            print(to_translate)
+            # print([list(i.subtree) for i in token.children])
+            # print(to_translate)
             # print(token.text)
 
     return result

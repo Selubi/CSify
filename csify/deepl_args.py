@@ -1,8 +1,5 @@
 import deepl
 from constants import deepl_apikey
-from google.cloud import translate_v2 as translate
-
-# TODO: CLEAN UP GOOGLE TRANSLATE in both constants.py and here
 
 translator = deepl.Translator(deepl_apikey)
 
@@ -54,5 +51,3 @@ ZH_TO_ZHJA = {
     translator.translate_text(base_sentence, target_lang="JA").text,
     "space": ''
 }
-
-#  below here uses google translate
