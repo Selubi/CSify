@@ -76,6 +76,7 @@ Upon initialization, the Csify class takes three arguement:
 
 - spacy_model : The spacy trained pipeline of the base sentence's language (eg. "en_core_web_sm" for English).
   here are the [list of available pipelines](https://spacy.io/models). Note that the pipeline MUST support parser.
+  There is no need to download the trained pipeline beforehand, the Csify class will do it for you.
 - translate_func : An str -> str function. It takes a text of base sentence's language as input and spits out the input'
   s
   inserted language translation. Wrap the machine translator with this function.
