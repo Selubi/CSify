@@ -67,7 +67,7 @@ your last report was 二週間以上前 .
 私たちの人生は、自分だけのものではないのです、胎内から墓場まで , we 're bound to others . 
 ```
 
-We define the notation [X][Y] as code switched sentence with X language as the base language and Y language as the
+We define the notation [X]-[Y] as code switched sentence with X language as the base language and Y language as the
 inserted language.
 We use ISO 639-1 Code for our naming convention. For example, JA-KO means a Japanese-Korean code switched text generated
 from a monolingual Japanese text.
@@ -76,6 +76,7 @@ Upon initialization, the Csify class takes three arguement:
 
 - spacy_model : The spacy trained pipeline of the base sentence's language (eg. "en_core_web_sm" for English).
   here are the [list of available pipelines](https://spacy.io/models). Note that the pipeline MUST support parser.
+  There is no need to download the spacy trained pipeline beforehand. The Csify class will do it for you.
 - translate_func : An str -> str function. It takes a text of base sentence's language as input and spits out the input'
   s
   inserted language translation. Wrap the machine translator with this function.
