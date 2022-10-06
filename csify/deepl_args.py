@@ -20,7 +20,14 @@ JA_TO_JAEN = {
 JA_TO_JAZH = {
     "spacy_model": "ja_core_news_sm",
     "translate_func": lambda base_sentence:
-    translator.translate_text(base_sentence, target_lang="ZH").text,
+    translator.translate_text(base_sentence, target_lang="ZH").text.strip("。"),
+    "space": ''
+}
+
+JA_TO_JAID = {
+    "spacy_model": "ja_core_news_sm",
+    "translate_func": lambda base_sentence:
+    translator.translate_text(base_sentence, target_lang="ID").text.strip(".?!").lower(),
     "space": ''
 }
 

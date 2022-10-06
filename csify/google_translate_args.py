@@ -10,6 +10,13 @@ JA_TO_JAKO = {
     "space": ''
 }
 
+EN_TO_ENJA = {
+    "spacy_model": "en_core_web_sm",
+    "translate_func": lambda base_sentence:
+    translate_client.translate(base_sentence, target_language="JA")["translatedText"],
+    "space": ' '
+}
+
 EN_TO_ENTH = {
     "spacy_model": "en_core_web_sm",
     "translate_func": lambda base_sentence:

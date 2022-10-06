@@ -16,9 +16,9 @@ if __name__ == '__main__':
     Of the extraction results located at ./data/split, we will take the test data (./data/split/test) that contains
     2000 lines and generate code-switched data from it.
     The result will be in 2 files:
-    English sentence and code-switched sentence generated from it will be stored in ./data/CSified/EN-Code-Switched
-    Japanese sentence and code-switched sentence generated from it will be stored in ./data/CSified/JA-Code-Switched
-    This demo also features a progress bar that tracks how many sentences it has generating and its speed in 
+    English sentences and code-switched sentences generated from it will be stored in ./data/CSified/EN-Code-Switched
+    Japanese sentences and code-switched sentences generated from it will be stored in ./data/CSified/JA-Code-Switched
+    This demo also features a progress bar that tracks how many sentences it has generated and its speed in 
     it/s (sentences per second).
     """
     csify.demo.generate_jesc_cs()
