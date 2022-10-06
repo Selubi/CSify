@@ -5,7 +5,10 @@ Generate code-switched text from monolingual text.
 
 This is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency Tree"
 currently evaluated for publication at ICNLP 2023.
-
+| :warning: WARNING |
+|:---------------------------------------------------------------------------------------------------------|
+| **Warning: [The JESC Generation Demo](#Demo: Generating EN-JA and JA-EN from JESC Corpus)this demo translates around
+100,000 characters. Pay attention to your API character limits!** |
 Setup
 ======
 
@@ -142,6 +145,6 @@ Refer to the below snippet of [./main.py](./main.py) last lines.
     csify.demo.generate_jesc_cs()
 ```
 
-| :warning: WARNING          |
-|:---------------------------|
-| Warning: this demo translates around 100,000 characters. Pay attention to your API character limits!|
+| :warning: WARNING                                                                                        |
+|:---------------------------------------------------------------------------------------------------------|
+| **Warning: this demo translates around 100,000 characters. Pay attention to your API character limits!** |
