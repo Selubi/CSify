@@ -39,8 +39,9 @@ deepl_apikey = "<insert deepl API key here>"
 ```python
 path_to_google_cloud_JSON_key = "<insert path to google cloud JSON key here>"
 ```
-
-:warning: **It is recommended assume [./constants.py](./constants.py) as unchanged in git to prevent API key leakage.**
+| :warning: WARNING |
+|:---------------------------------------------------------------------------------------------------------|
+| **It is recommended assume [./constants.py](./constants.py) as unchanged in git to prevent API key leakage.**|
 
 ```commandline
 git update-index --assume-unchanged constants.py
