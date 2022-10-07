@@ -1,7 +1,8 @@
 CSify
 ======
-
 Generate code-switched text from monolingual text.
+
+[![DOI](https://zenodo.org/badge/543922457.svg)](https://zenodo.org/badge/latestdoi/543922457)
 
 This is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency Tree"
 currently evaluated for publication at ICNLP 2023.
