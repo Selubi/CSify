@@ -6,9 +6,15 @@ class Csify:
     def __init__(self, spacy_model, translate_func, space=' '):
         """
         Initiate a code-switced text generator.
-        :param spacy_model: The Spacy trained pipeline of the base sentence's language (eg. "en_core_web_sm" for English). here is the [list of available pipelines](https://spacy.io/models). Note that the pipeline MUST support parser. There is no need to download the spacy pipeline beforehand. The Csify class will do it for you.
-        :param translate_func: An str -> str function. It takes a text of the base sentence's language as input and spits out the input's inserted language translation. Wrap the machine translator with this function.
-        :param space: default=' '. Word separator of the base language. Some languages such as Chinese and Japanese don't use space.In that case, space should be an empty string.
+        :param spacy_model: The Spacy trained pipeline of the base sentence's language (e.g. "en_core_web_sm" for English).
+        The list of trained pipelines can be found at https://spacy.io/models. Note that the pipeline MUST support dependency
+        parsing. There is no need to download the spacy pipeline beforehand. The Csify class will do it for you.
+        :param translate_func: An str -> str function. It takes a text of the base sentence's language as input and outputs the
+         input's inserted language translation. Wrap the machine translator with this function. It is recommended to truncate
+        all kinds of punctuation of the inserted language as most of the translation will be done on subsentences, not
+         complete sentences.
+        :param space: default=' '. Word separator of the base language. Some languages, such as Chinese and Japanese, don't use
+         space. In that case, space should be an empty string.
         """
         try:
             self.dependency_parser = spacy.load(spacy_model)

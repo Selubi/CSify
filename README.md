@@ -1,11 +1,11 @@
 CSify
 ======
-Generate code-switched text from monolingual text.
+Generate code-switched texts from monolingual texts.
 
 [![DOI](https://zenodo.org/badge/543922457.svg)](https://zenodo.org/badge/latestdoi/543922457)
 
-This is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency Tree"
-currently evaluated for publication at ICNLP 2023.
+This repository is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency
+Tree," currently evaluated for publication at ICNLP 2023.
 | :warning: WARNING |
 |:---------------------------------------------------------------------------------------------------------|
 | **Warning: The JESC demo translates around 100,000 characters. Pay attention to your API character limit!** |
@@ -24,7 +24,6 @@ or [Google Cloud Translation AI](https://cloud.google.com/translate) or both as 
 Alternatively, you can bring your own machine translator. Refer to  [The Csify Class](#the-csify-class)
 and [Adding More Language Pairs](#adding-more-language-pairs) for more details.
 
-
 - For DeepL, get [DeepL API Key](https://www.deepl.com/en/docs-api) and insert the key
   in [./constants.py](./constants.py)
 
@@ -33,19 +32,20 @@ deepl_apikey = "<insert deepl API key here>"
 ```
 
 - For Google Cloud Translation AI, follow this [setup guide](https://cloud.google.com/translate/docs/setup) until
-  "Create a service account key". You should get a JSON file. Save the JSON file and insert the path to it
+  "Create a service account key." You should get a JSON file. Save the JSON file and insert the path to it
   in [./constants.py](./constants.py). It is recommended to store the JSON file in a safe directory or
   [./google_cloud_key.json](./google_cloud_key.json) as it is automatically included in [.gitignore](./.gitignore).
 
 ```python
 path_to_google_cloud_JSON_key = "<insert path to google cloud JSON key here>"
 ```
+
 | :warning: WARNING |
 |:---------------------------------------------------------------------------------------------------------|
-| **It is recommended assume [./constants.py](./constants.py) as unchanged in git to prevent API key leakage.**|
+| **It is recommended to assume [./constants.py](./constants.py) as unchanged in git to prevent API key leakage.**|
 |```git update-index --assume-unchanged constants.py ```|
 
-DeepL is relatively easier to set up but has less supported language compared to Google Cloud Translation AI.
+DeepL is relatively easier to set up but has less supported language than Google Cloud Translation AI.
 
 If you only set up DeepL, to run the demo at [main.py](main.py), comment out the line below.
 
@@ -84,16 +84,15 @@ from a monolingual Japanese text.
 
 Upon initialization, the Csify class takes three arguments:
 
-- spacy_model: The Spacy trained pipeline of the base sentence's language (eg. "en_core_web_sm" for English).
-  here is the [list of available pipelines](https://spacy.io/models). Note that the pipeline MUST support parser.
-  There is no need to download the spacy pipeline beforehand. The Csify class will do it for you.
-- translate_func : An str -> str function. It takes a text of the base sentence's language as input and spits out the
-  input'
-  s
-  inserted language translation. Wrap the machine translator with this function.
-- space : default=' '. Word separator of the base language. Some languages such as Chinese and Japanese don't use
-  space.
-  In that case, space should be an empty string.
+- spacy_model: The Spacy trained pipeline of the base sentence's language (e.g. "en_core_web_sm" for English).
+  Here is the [list of available pipelines](https://spacy.io/models). Note that the pipeline MUST support dependency
+  parsing. There is no need to download the spacy pipeline beforehand. The Csify class will do it for you.
+- translate_func : An str -> str function. It takes a text of the base sentence's language as input and outputs the
+  input's inserted language translation. Wrap the machine translator with this function. It is recommended to truncate
+  all kinds of punctuation of the inserted language as most of the translation will be done on subsentences, not
+  complete sentences.
+- space : default=' '. Word separator of the base language. Some languages, such as Chinese and Japanese, don't use
+  space. In that case, space should be an empty string.
 
 If you are using DeepL or Google Cloud Translation API,
 there are already some pre-built function arguments for Csify class at [./csify/deepl_args.py](./csify/deepl_args.py)
@@ -135,7 +134,7 @@ print(code_switcher.generate("Mein Name ist Sam, obwohl er kurz für Samantha is
 
 Demo: Generating EN-JA and JA-EN from [JESC Corpus](https://nlp.stanford.edu/projects/jesc/index.html)
 ======
-Refer to the below snippet of [./main.py](./main.py) last lines.
+Refer to the below snippet of [./main.py](./main.py).
 
 ```text
     """
