@@ -1,6 +1,8 @@
 import deepl
 from constants import deepl_apikey
 
+#  Pre-built DeepL arguments for the Csify class.
+
 translator = deepl.Translator(deepl_apikey)
 
 EN_TO_ENJA = {

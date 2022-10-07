@@ -5,9 +5,11 @@ import csify.demo
 
 #  This is a demo on how to use the Csify class
 if __name__ == '__main__':
+    #  Initiate an EN-JA code-switcher.
     code_switcher = Csify(**csify.deepl_args.EN_TO_ENJA)
     print(code_switcher.generate("your last report was more than two weeks ago."))
     print(code_switcher.generate("our lives are not our own, from womb to tomb, we're bound to others."))
+    #  Initiate an KO-JA code-switcher.
     code_switcher = Csify(**csify.google_translate_args.KO_TO_KOJA)
     print(code_switcher.generate("저는 어제 약국에 가서 약을 많이 샀어요."))
     """

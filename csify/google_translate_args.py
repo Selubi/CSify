@@ -1,6 +1,8 @@
 from constants import path_to_google_cloud_JSON_key
 from google.cloud import translate_v2 as translate
 
+#  Pre-built Google Cloud Translation AI arguments for the Csify class.
+
 translate_client = translate.Client.from_service_account_json(path_to_google_cloud_JSON_key)
 
 JA_TO_JAKO = {
