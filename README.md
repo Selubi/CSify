@@ -23,6 +23,7 @@ or [Google Cloud Translation AI](https://cloud.google.com/translate) or both as 
 Alternatively, you can bring your own machine translator. Refer to  [The Csify Class](#the-csify-class)
 and [Adding More Language Pairs](#adding-more-language-pairs) for more details.
 
+
 - For DeepL, get [DeepL API Key](https://www.deepl.com/en/docs-api) and insert the key
   in [./constants.py](./constants.py)
 
@@ -32,10 +33,17 @@ deepl_apikey = "<insert deepl API key here>"
 
 - For Google Cloud Translation AI, follow this [setup guide](https://cloud.google.com/translate/docs/setup) until
   "Create a service account key". You should get a JSON file. Save the JSON file and insert the path to it
-  in [./constants.py](./constants.py)
+  in [./constants.py](./constants.py). It is recommended to store the JSON file in a safe directory or
+  [./google_cloud_key.json](./google_cloud_key.json) as it is automatically included in [.gitignore](./.gitignore).
 
 ```python
 path_to_google_cloud_JSON_key = "<insert path to google cloud JSON key here>"
+```
+
+:warning: **It is recommended assume [./constants.py](./constants.py) as unchanged in git to prevent API key leakage.**
+
+```commandline
+git update-index --assume-unchanged constants.py
 ```
 
 DeepL is relatively easier to set up but has less supported language compared to Google Cloud Translation AI.
