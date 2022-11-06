@@ -8,7 +8,7 @@ The latest release can be found at the DOI below.
 [![DOI](https://zenodo.org/badge/543922457.svg)](https://zenodo.org/badge/latestdoi/543922457)
 
 This repository is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency
-Tree," currently evaluated for publication at ICNLP 2023.
+Tree," accepted for publication at [ALTA 2022](https://alta2022.alta.asn.au/).
 | :warning: WARNING |
 |:---------------------------------------------------------------------------------------------------------|
 | **Warning: The JESC demo translates around 100,000 characters. Pay attention to your API character limit!** |
