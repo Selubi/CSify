@@ -1,6 +1,6 @@
 # import sys
 # sys.path.insert(0, '../src/csify')
-from src.csify.csify import CSify
+from src.csify import CSify
 import google_translate_args
 import deepl_args
 import demo
