@@ -2,7 +2,7 @@ from spacy.cli.download import download as download_spacy
 import spacy
 
 
-class Csify:
+class CSify:
     def __init__(self, spacy_model, translate_func, space=' '):
         """
         Initiate a code-switced text generator.

@@ -1,17 +1,21 @@
-from csify import Csify
-import demo.demo
+# import sys
+# sys.path.insert(0, '../src/csify')
+from src.csify.csify import CSify
+import google_translate_args
+import deepl_args
+import demo
 
 #  This is a demo on how to use the Csify class
 if __name__ == '__main__':
     #  Initiate an EN-JA code-switcher.
-    code_switcher = Csify(**demo.deepl_args.EN_TO_ENJA)
+    code_switcher = CSify(**deepl_args.EN_TO_ENJA)
     print(code_switcher.generate("your last report was more than two weeks ago."))
     print(code_switcher.generate("our lives are not our own, from womb to tomb, we're bound to others."))
     #  Initiate an KO-JA code-switcher.
-    code_switcher = Csify(**demo.google_translate_args.KO_TO_KOJA)
+    code_switcher = CSify(**google_translate_args.KO_TO_KOJA)
     print(code_switcher.generate("저는 어제 약국에 가서 약을 많이 샀어요."))
     """
-    This demo function below is defined at ./csify/demo.py
+    This demo function below is defined at ./demo.py
     It downloads and extracts the JESC split corpus, a parallel Japanese-English monolingual corpus.
     Of the extraction results located at ./data/split, we will take the test data (./data/split/test) that contains
     2000 lines and generate code-switched data from it.
@@ -21,4 +25,4 @@ if __name__ == '__main__':
     This demo also features a progress bar that tracks how many sentences it has generated and its speed in 
     it/s (sentences per second).
     """
-    demo.demo.generate_jesc_cs()
+    demo.generate_jesc_cs()
