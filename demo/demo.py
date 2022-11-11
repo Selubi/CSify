@@ -1,11 +1,10 @@
 from pathlib import Path
 from csv import QUOTE_NONE
 from tqdm import tqdm
-from csify.csify import Csify
+from demo.csify import Csify
 import requests
 import tarfile
 import pandas as pd
-import csify.deepl_args
 
 
 def generate_jesc_cs():

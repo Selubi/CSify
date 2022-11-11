@@ -1,4 +1,4 @@
-from constants import path_to_google_cloud_JSON_key
+from demo.constants import path_to_google_cloud_JSON_key
 from google.cloud import translate_v2 as translate
 
 #  Pre-built Google Cloud Translation AI arguments for the Csify class.

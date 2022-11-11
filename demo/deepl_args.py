@@ -1,5 +1,5 @@
 import deepl
-from constants import deepl_apikey
+from demo.constants import deepl_apikey
 
 #  Pre-built DeepL arguments for the Csify class.
 

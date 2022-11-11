@@ -28,7 +28,7 @@ Alternatively, you can bring your own machine translator. Refer to  [The Csify C
 and [Adding More Language Pairs](#adding-more-language-pairs) for more details.
 
 - For DeepL, get [DeepL API Key](https://www.deepl.com/en/docs-api) and insert the key
-  in [./constants.py](./constants.py)
+  in [./constants.py](demo/constants.py)
 
 ```python
 deepl_apikey = "<insert deepl API key here>"
@@ -36,8 +36,8 @@ deepl_apikey = "<insert deepl API key here>"
 
 - For Google Cloud Translation AI, follow this [setup guide](https://cloud.google.com/translate/docs/setup) until
   "Create a service account key." You should get a JSON file. Save the JSON file and insert the path to it
-  in [./constants.py](./constants.py). It is recommended to store the JSON file in a safe directory or
-  [./google_cloud_key.json](./google_cloud_key.json) as it is automatically included in [.gitignore](./.gitignore).
+  in [./constants.py](demo/constants.py). It is recommended to store the JSON file in a safe directory or
+  [./google_cloud_key.json](demo/google_cloud_key.json) as it is automatically included in [.gitignore](./.gitignore).
 
 ```python
 path_to_google_cloud_JSON_key = "<insert path to google cloud JSON key here>"
@@ -45,30 +45,30 @@ path_to_google_cloud_JSON_key = "<insert path to google cloud JSON key here>"
 
 | :warning: WARNING |
 |:---------------------------------------------------------------------------------------------------------|
-| **It is recommended to assume [./constants.py](./constants.py) as unchanged in git to prevent API key leakage.**|
+| **It is recommended to assume [./constants.py](demo/constants.py) as unchanged in git to prevent API key leakage.**|
 |```git update-index --assume-unchanged constants.py ```|
 
 DeepL is relatively easier to set up but has less supported language than Google Cloud Translation AI.
 
-If you only set up DeepL, to run the demo at [main.py](main.py), comment out the line below.
+If you only set up DeepL, to run the demo at [main.py](demo/main.py), comment out the line below.
 
 ```python
-import csify.google_translate_args
+import demo.google_translate_args
 ```
 
 Vice versa if you only set up Google Cloud Translation AI.
 
 The Csify Class
 ======
-The Csify class is defined at [./csify/csify.py](./csify/csify.py).
+The Csify class is defined at [./csify/csify.py](demo/csify.py).
 It generates code-switched text from a monolingual base sentence by translating parts of it
 to the language you want to insert via the translate function.
 
 ```python
-from csify.csify import Csify
-import csify.deepl_args
+from demo.csify import Csify
+import demo.deepl_args
 
-code_switcher = Csify(**csify.deepl_args.EN_TO_ENJA)
+code_switcher = Csify(**demo.deepl_args.EN_TO_ENJA)
 print(code_switcher.generate("your last report was more than two weeks ago."))
 print(code_switcher.generate("our lives are not our own, from womb to tomb, we're bound to others."))
 ```
@@ -98,9 +98,9 @@ Upon initialization, the Csify class takes three arguments:
   space. In that case, space should be an empty string.
 
 If you are using DeepL or Google Cloud Translation API,
-there are already some pre-built function arguments for Csify class at [./csify/deepl_args.py](./csify/deepl_args.py)
+there are already some pre-built function arguments for Csify class at [./csify/deepl_args.py](demo/deepl_args.py)
 and
-[./csify/google_translate_args.py](./csify/deepl_args.py) respectively. For example, to generate EN-ZH with DeepL,
+[./csify/google_translate_args.py](demo/deepl_args.py) respectively. For example, to generate EN-ZH with DeepL,
 the Csify function arguments look something like this
 
 ```python
@@ -121,15 +121,15 @@ code-switched
 sentences.
 
 ```python
-from csify.csify import Csify
+from demo.csify import Csify
 from bring_my_own_translator import german_to_swedish_translator
 
 my_translator = german_to_swedish_translator()
 my_code_switcher_args = {
-    "spacy_model": "de_core_news_sm",
-    "translate_func": lambda base_sentence:
-    my_translator.my_translate_function(base_sentence),
-    "space": ' '
+  "spacy_model": "de_core_news_sm",
+  "translate_func": lambda base_sentence:
+  my_translator.my_translate_function(base_sentence),
+  "space": ' '
 }
 code_switcher = Csify(**my_code_switcher_args)
 print(code_switcher.generate("Mein Name ist Sam, obwohl er kurz für Samantha ist."))
@@ -137,7 +137,7 @@ print(code_switcher.generate("Mein Name ist Sam, obwohl er kurz für Samantha is
 
 Demo: Generating EN-JA and JA-EN from [JESC Corpus](https://nlp.stanford.edu/projects/jesc/index.html)
 ======
-Refer to the below snippet of [./main.py](./main.py).
+Refer to the below snippet of [./main.py](demo/main.py).
 
 ```text
     """
