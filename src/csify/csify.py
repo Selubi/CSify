@@ -2,13 +2,13 @@ from spacy.cli.download import download as download_spacy
 import spacy
 
 
-class Csify:
+class CSify:
     def __init__(self, spacy_model, translate_func, space=' '):
         """
         Initiate a code-switced text generator.
         :param spacy_model: The Spacy trained pipeline of the base sentence's language (e.g. "en_core_web_sm" for English).
         The list of trained pipelines can be found at https://spacy.io/models. Note that the pipeline MUST support dependency
-        parsing. There is no need to download the spacy pipeline beforehand. The Csify class will do it for you.
+        parsing. There is no need to download the spacy pipeline beforehand. The CSify class will do it for you.
         :param translate_func: An str -> str function. It takes a text of the base sentence's language as input and outputs the
          input's inserted language translation. Wrap the machine translator with this function. It is recommended to truncate
         all kinds of punctuation of the inserted language as most of the translation will be done on subsentences, not
