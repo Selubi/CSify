@@ -126,7 +126,8 @@ path_to_google_cloud_JSON_key = "<insert path to google cloud JSON key here>"
 
 | :warning: WARNING |
 |:---------------------------------------------------------------------------------------------------------|
-| **It is recommended to assume [./constants.py](demo/constants.py) as unchanged in git to prevent API key leakage.**|
+| **It is recommended to assume [demo/constants.py](demo/constants.py) as unchanged in git to prevent API key
+leakage.**|
 |```git update-index --assume-unchanged constants.py ```|
 
 DeepL is relatively easier to set up but has less supported language than Google Cloud Translation AI.
