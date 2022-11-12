@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "csify"
-version = "1.0.3"
+version = "1.0.4"
 authors = [
     { name = "Bryan Gregorius", email = "contact@selubi.tech" },
 ]
@@ -25,5 +25,5 @@ classifiers = [
 dependencies = ["spacy~=3.3.1"]
 
 [project.urls]
-"Homepage" = "https://github.com/Selubi/CSify"
+"Source Code" = "https://github.com/Selubi/CSify"
 "Bug Tracker" = "https://github.com/Selubi/CSify/issues"
