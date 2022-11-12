@@ -95,7 +95,7 @@ sentences.
 
 ```python
 from csify import CSify
-from my_amazing_translator import german_to_swedish_translator
+from my_awesome_translator import german_to_swedish_translator
 
 my_translator = german_to_swedish_translator()
 my_code_switcher_args = {
