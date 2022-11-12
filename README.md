@@ -10,6 +10,11 @@ The latest release can be found at the DOI below.
 This repository is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency
 Tree," accepted for publication at [ALTA 2022](https://alta2022.alta.asn.au/).
 
+In this documentation, we define the notation [X]-[Y] as code switched sentence with X language as the base language and
+Y language as the inserted language.
+We use ISO 639-1 Code for our naming convention. For example, JA-KO means a Japanese-Korean code switched text generated
+from a monolingual Japanese text.
+
 Setup
 ======
 This package is available at [PyPI](https://pypi.org/project/csify/). You can install with pip.
@@ -52,11 +57,6 @@ outputs
 your last report was 二週間以上前 .
 私たちの人生は、自分だけのものではないのです、胎内から墓場まで , we 're bound to others . 
 ```
-
-We define the notation [X]-[Y] as code switched sentence with X language as the base language and Y language as the
-inserted language.
-We use ISO 639-1 Code for our naming convention. For example, JA-KO means a Japanese-Korean code switched text generated
-from a monolingual Japanese text.
 
 Upon initialization, the CSify class takes three arguments:
 
@@ -174,7 +174,7 @@ Refer to the below snippet of [demo/main.py](demo/main.py).
     This demo also features a progress bar that tracks how many sentences it has generated and its speed in 
     it/s (sentences per second).
     """
-    demo.generate_jesc_cs()
+demo.generate_jesc_cs()
 ```
 
 | :warning: WARNING                                                                                       |
