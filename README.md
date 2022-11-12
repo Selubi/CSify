@@ -23,7 +23,7 @@ This package is available at [PyPI](https://pypi.org/project/csify/). You can in
 pip install csify
 ```
 
-This package only comes with spacy and contains no machine translator.
+This package only comes with [spaCy](https://spacy.io/) and contains no machine translator.
 
 The CSify Class
 ======
@@ -60,9 +60,9 @@ your last report was 二週間以上前 .
 
 Upon initialization, the CSify class takes three arguments:
 
-- spacy_model: The Spacy trained pipeline of the base sentence's language (e.g. "en_core_web_sm" for English).
+- spacy_model: The spaCy trained pipeline of the base sentence's language (e.g. "en_core_web_sm" for English).
   Here is the [list of available pipelines](https://spacy.io/models). Note that the pipeline MUST support dependency
-  parsing. There is no need to download the spacy pipeline beforehand. The Csify class will do it for you.
+  parsing. There is no need to download the spaCy pipeline beforehand. The Csify class will do it for you.
 - translate_func : An str -> str function. It takes a text of the base sentence's language as input and outputs the
   input's inserted language translation. Wrap the machine translator's translate function to a new function. It is
   recommended to truncate all kinds of punctuation of the inserted language in this function as most of the translation
