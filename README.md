@@ -9,15 +9,23 @@ The latest release can be found at the DOI below.
 
 This repository is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency
 Tree," accepted for publication at [ALTA 2022](https://alta2022.alta.asn.au/).
-| :warning: WARNING |
-|:---------------------------------------------------------------------------------------------------------|
-| **Warning: The JESC demo translates around 100,000 characters. Pay attention to your API character limit!** |
 
-The Csify Class
+Setup
 ======
-The Csify class is defined at [src/csify/csify.py](src/csify/csify.py).
-It generates code-switched text from a monolingual base sentence by translating parts of it
-to the language you want to insert via the translate function.
+This package is available at [PyPI](https://pypi.org/project/csify/). You can install with pip.
+
+```commandline
+pip install csify
+```
+
+This package only comes with spacy and contains no machine translator.
+
+The CSify Class
+======
+The CSify class generates code-switched text from a monolingual base sentence by translating parts of it
+to the language you want to insert via the translate function. **You need to bring your own machine translator**.
+Here is an example code on generating EN-JA code-switched sentence
+using [DeepL API](https://www.deepl.com/pro-api?cta=header-pro-api).
 
 ```python
 from csify import CSify
@@ -29,7 +37,7 @@ translator = deepl.Translator("<deepl_apikey>")
 EN_TO_ENJA = {
   "spacy_model": "en_core_web_sm",
   "translate_func": lambda base_sentence:
-  translator.translate_text(base_sentence, target_lang="JA").text,
+  translator.translate_text(base_sentence, target_lang="JA").text.strip("。"),
   "space": ' '
 }
 
@@ -50,23 +58,23 @@ inserted language.
 We use ISO 639-1 Code for our naming convention. For example, JA-KO means a Japanese-Korean code switched text generated
 from a monolingual Japanese text.
 
-Upon initialization, the Csify class takes three arguments:
+Upon initialization, the CSify class takes three arguments:
 
 - spacy_model: The Spacy trained pipeline of the base sentence's language (e.g. "en_core_web_sm" for English).
   Here is the [list of available pipelines](https://spacy.io/models). Note that the pipeline MUST support dependency
   parsing. There is no need to download the spacy pipeline beforehand. The Csify class will do it for you.
 - translate_func : An str -> str function. It takes a text of the base sentence's language as input and outputs the
-  input's inserted language translation. Wrap the machine translator with this function. It is recommended to truncate
-  all kinds of punctuation of the inserted language as most of the translation will be done on subsentences, not
-  complete sentences.
+  input's inserted language translation. Wrap the machine translator's translate function to a new function. It is
+  recommended to truncate all kinds of punctuation of the inserted language in this function as most of the translation
+  will be done on subsentences, not complete sentences.
 - space : default=' '. Word separator of the base language. Some languages, such as Chinese and Japanese, don't use
   space. In that case, space should be an empty string.
 
 If you are using DeepL or Google Cloud Translation API,
-there are already some pre-built function arguments for Csify class at [demo/deepl_args.py](demo/deepl_args.py)
+there are already some pre-built function arguments for CSify class at [demo/deepl_args.py](demo/deepl_args.py)
 and
-[demo/deepl_args.py](demo/deepl_args.py) respectively. For example, to generate EN-ZH with DeepL,
-the Csify function arguments look something like this
+[demo/google_translate_args.py](demo/google_translate_args.py) respectively. For example, to generate EN-ZH with DeepL,
+the CSify function arguments look something like this
 
 ```python
 EN_TO_ENZH = {
@@ -77,8 +85,18 @@ EN_TO_ENZH = {
 }
 ```
 
-Setup
+Setup - Demo
 ======
+
+| :warning: WARNING |
+|:---------------------------------------------------------------------------------------------------------|
+| **Warning: The JESC demo translates around 100,000 characters. Pay attention to your API character limit!** |
+
+- Clone this repository
+
+```commandline
+git clone https://github.com/Selubi/CSify.git
+```
 
 - Install library dependencies
 
@@ -88,7 +106,7 @@ pip install -r requirements.txt
 
 Setup either [DeepL API](https://www.deepl.com/pro-api?cta=header-pro-api)
 or [Google Cloud Translation AI](https://cloud.google.com/translate) or both as machine translators.
-Alternatively, you can bring your own machine translator. Refer to  [The Csify Class](#the-csify-class)
+Alternatively, you can bring your own machine translator. Refer to  [The CSify Class](#the-csify-class)
 and [Adding More Language Pairs](#adding-more-language-pairs) for more details.
 
 - For DeepL, get [DeepL API Key](https://www.deepl.com/en/docs-api) and insert the key
@@ -113,13 +131,7 @@ path_to_google_cloud_JSON_key = "<insert path to google cloud JSON key here>"
 
 DeepL is relatively easier to set up but has less supported language than Google Cloud Translation AI.
 
-If you only set up DeepL, to run the demo at [main.py](demo/main.py), comment out the line below.
 
-```python
-import demo.google_translate_args
-```
-
-Vice versa if you only set up Google Cloud Translation AI.
 
 
 
@@ -132,7 +144,7 @@ code-switched
 sentences.
 
 ```python
-from csify import Csify
+from csify import CSify
 from bring_my_own_translator import german_to_swedish_translator
 
 my_translator = german_to_swedish_translator()
@@ -142,7 +154,7 @@ my_code_switcher_args = {
   my_translator.my_translate_function(base_sentence),
   "space": ' '
 }
-code_switcher = Csify(**my_code_switcher_args)
+code_switcher = CSify(**my_code_switcher_args)
 print(code_switcher.generate("Mein Name ist Sam, obwohl er kurz für Samantha ist."))
 ```
 
@@ -150,7 +162,7 @@ Demo: Generating EN-JA and JA-EN from [JESC Corpus](https://nlp.stanford.edu/pro
 ======
 Refer to the below snippet of [demo/main.py](demo/main.py).
 
-```text
+```python
     """
     This demo function below is defined at ./demo.py
     It downloads and extracts the JESC split corpus, a parallel Japanese-English monolingual corpus.
