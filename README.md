@@ -85,6 +85,29 @@ EN_TO_ENZH = {
 }
 ```
 
+Adding More Language Pairs
+======
+Adding more language pairs equates to adding a function argument combination for the Csify class. Do note that
+base sentences can only be from languages that have Spacy trained parser pipeline. You can even bring your own machine
+translator. The following code is an example template of using your custom machine translator to create DE-SV
+code-switched
+sentences.
+
+```python
+from csify import CSify
+from bring_my_own_translator import german_to_swedish_translator
+
+my_translator = german_to_swedish_translator()
+my_code_switcher_args = {
+  "spacy_model": "de_core_news_sm",
+  "translate_func": lambda base_sentence:
+  my_translator.my_translate_function(base_sentence),
+  "space": ' '
+}
+code_switcher = CSify(**my_code_switcher_args)
+print(code_switcher.generate("Mein Name ist Sam, obwohl er kurz für Samantha ist."))
+```
+
 Setup - Demo
 ======
 
@@ -132,32 +155,6 @@ leakage.**|
 
 DeepL is relatively easier to set up but has less supported language than Google Cloud Translation AI.
 
-
-
-
-
-Adding More Language Pairs
-======
-Adding more language pairs equates to adding a function argument combination for the Csify class. Do note that
-base sentences can only be from languages that have Spacy trained parser pipeline. You can even bring your own machine
-translator. The following code is an example template of using your custom machine translator to create DE-SV
-code-switched
-sentences.
-
-```python
-from csify import CSify
-from bring_my_own_translator import german_to_swedish_translator
-
-my_translator = german_to_swedish_translator()
-my_code_switcher_args = {
-  "spacy_model": "de_core_news_sm",
-  "translate_func": lambda base_sentence:
-  my_translator.my_translate_function(base_sentence),
-  "space": ' '
-}
-code_switcher = CSify(**my_code_switcher_args)
-print(code_switcher.generate("Mein Name ist Sam, obwohl er kurz für Samantha ist."))
-```
 
 Demo: Generating EN-JA and JA-EN from [JESC Corpus](https://nlp.stanford.edu/projects/jesc/index.html)
 ======
