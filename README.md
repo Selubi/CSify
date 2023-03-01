@@ -12,6 +12,7 @@ The latest release can be found below.
 This repository is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency
 Tree," accepted for publication at [ALTA 2022](https://aclanthology.org/2022.alta-1.12/).
 
+The demo for this code is available [here](https://csify.selubi.tech/).
 
 In this documentation, we define the notation [X]-[Y] as code switched sentence with X language as the base language and
 Y language as the inserted language.
