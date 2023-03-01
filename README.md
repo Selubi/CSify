@@ -10,7 +10,7 @@ The latest release can be found below.
 [![DOI](https://zenodo.org/badge/543922457.svg)](https://zenodo.org/badge/latestdoi/543922457)
 
 This repository is an implementation of our paper "Generating Code-Switched Text from Monolingual Text with Dependency
-Tree," accepted for publication at [ALTA 2022](https://alta2022.alta.asn.au/).
+Tree," accepted for publication at [ALTA 2022](https://aclanthology.org/2022.alta-1.12/).
 
 
 In this documentation, we define the notation [X]-[Y] as code switched sentence with X language as the base language and
